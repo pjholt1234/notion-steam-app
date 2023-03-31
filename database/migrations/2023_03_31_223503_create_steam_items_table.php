@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('steam_items', function (Blueprint $table) {
             $table->id();
-            $table->string('steam_id');
+            $table->string('market_hash_name');
             $table->string('name')->nullable();
             $table->decimal('current_price_per_unit')->nullable();
             $table->timestamps();
