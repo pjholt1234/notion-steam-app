@@ -11,7 +11,7 @@ class SteamItem extends Model
     use HasFactory;
 
     protected $fillable = [
-        'steam_id',
+        'market_hash_name',
         'name',
         'current_price_per_unit',
         'updated_at',
