@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class SteamItem extends Model
 {
@@ -25,5 +26,10 @@ class SteamItem extends Model
     public function steamPurchases(): HasMany
     {
         return $this->hasMany(SteamPurchase::class, 'steam_item_id', 'id');
+    }
+
+    public function stockItem(): HasOne
+    {
+        return $this->hasOne(StockItem::class, 'steam_item_id', 'id');
     }
 }

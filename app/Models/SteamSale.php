@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class SteamSale extends Model
 {
@@ -23,5 +24,10 @@ class SteamSale extends Model
     public function steamItem(): BelongsTo
     {
         return $this->belongsTo(SteamItem::class, 'steam_item_id', 'id');
+    }
+
+    public function stockItem(): HasOneThrough
+    {
+        return $this->HasOneThrough(StockItem::class, SteamItem::class, 'id', 'steam_item_id');
     }
 }
