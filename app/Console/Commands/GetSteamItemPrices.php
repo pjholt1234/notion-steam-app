@@ -45,9 +45,9 @@ class GetSteamItemPrices extends Command
         }
 
         foreach($items as $item){
-            $path = '/market/item/730/'.$item->market_hash_name;
+            $url = '/market/item/730/'.$item->market_hash_name;
             $currentPrice = $marketApiRepository
-                ->buildUrl($path)
+                ->buildUrl($url)
                 ->makeRequest('get');
 
             if(!is_float($currentPrice)){
