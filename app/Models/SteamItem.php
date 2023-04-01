@@ -12,7 +12,6 @@ class SteamItem extends Model
 
     protected $fillable = [
         'market_hash_name',
-        'name',
         'current_price_per_unit',
         'updated_at',
         'created_at'
