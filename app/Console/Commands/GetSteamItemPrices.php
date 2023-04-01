@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\SteamItem;
+use App\Repositories\CurrencyConversionApiRepository;
 use App\Repositories\SteamMarketApiRepository;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
@@ -26,7 +27,7 @@ class GetSteamItemPrices extends Command
     /**
      * Execute the console command.
      */
-    public function handle(SteamMarketApiRepository $steamMarketService): void
+    public function handle(SteamMarketApiRepository $marketApiRepository, CurrencyConversionApiRepository $conversionApiRepository): void
     {
         $options = $this->options();
         if (array_key_exists('itemId', $options) && isset($options['itemId'])) {
@@ -35,9 +36,17 @@ class GetSteamItemPrices extends Command
             $items = SteamItem::all();
         }
 
+        $usdToPounds = $conversionApiRepository
+            ->buildUrl('&currencies=GBP')
+            ->makeRequest('get');
+
+        if(!is_float($usdToPounds)){
+            $usdToPounds = 0.785057;
+        }
+
         foreach($items as $item){
             $path = '/market/item/730/'.$item->market_hash_name;
-            $currentPrice = $steamMarketService
+            $currentPrice = $marketApiRepository
                 ->buildUrl($path)
                 ->makeRequest('get');
 
@@ -45,7 +54,7 @@ class GetSteamItemPrices extends Command
                 continue;
             }
 
-            $item->current_price_per_unit = $currentPrice;
+            $item->current_price_per_unit = round($currentPrice * $usdToPounds, 2);
             $item->save();
         }
 

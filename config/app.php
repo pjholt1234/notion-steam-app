@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Facade;
 return [
 
     'steam_api_key' => env('STEAM_MARKET_API_KEY'),
-
+    'currency_conversion_api_key' => env('CURRENCY_CONVERSION_API_KEY'),
     /*
     |--------------------------------------------------------------------------
     | Application Name
