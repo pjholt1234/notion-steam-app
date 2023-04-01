@@ -7,9 +7,8 @@ use App\Abstracts\AbstractApiRepository;
 
 class SteamMarketApiRepository extends AbstractApiRepository
 {
-    public string $apiKey;
-
-    public bool $processData = true;
+    protected string $apiKey;
+    protected bool $processData = true;
 
     public function __construct(){
         parent::__construct();
