@@ -16,6 +16,7 @@ class StockItem extends Model
         'steam_item_id',
         'quantity',
         'net_value',
+        'total_cost'
     ];
 
     public function steamItem(): belongsTo
@@ -46,5 +47,11 @@ class StockItem extends Model
             $this->quantity = $quantity;
             $this->save();
         }
+    }
+
+    public function calculateCost()
+    {
+        $this->total_cost = $this->steamPurchases->sum('purchase_cost');
+        $this->save();
     }
 }

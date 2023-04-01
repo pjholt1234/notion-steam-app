@@ -13,5 +13,9 @@ class SteamPurchaseObserver
         if($steamPurchase->isDirty('quantity')){
             $steamPurchase->steamItem->stockItem->calculateStock();
         }
+
+        if($steamPurchase->isDirty('purchase_cost')){
+            $steamPurchase->steamItem->stockItem->calculateCost();
+        }
     }
 }

@@ -93,3 +93,33 @@ test('test automatic stock calculation', function () {
 
     $this->assertEquals($predictedStock, $stockItem->quantity);
 });
+
+test('test automatic cost calculation', function () {
+    $steamItem = SteamItem::factory()->create([
+        'market_hash_name' => $this->validMarketNames[0]
+    ]);
+
+    $stockItem = $steamItem->stockItem;
+    $this->assertNotNull($stockItem);
+    $this->assertEquals(0, $stockItem->total_cost);
+
+    $numberOfPurchases = $this->faker->numberBetween(5,10);
+    $purchaseCostTotal = 0;
+
+    for($x = 0; $x < $numberOfPurchases; $x++){
+        $cost = $this->faker->numberBetween(1,10);
+
+        SteamPurchase::factory()
+            ->for($steamItem)
+            ->create([
+                'purchase_cost' => $cost
+            ]);
+
+        $purchaseCostTotal = $purchaseCostTotal + $cost;
+    }
+
+
+    $stockItem->refresh();
+    $this->assertEquals($numberOfPurchases, $stockItem->steamPurchases->count());
+    $this->assertEquals($purchaseCostTotal, $stockItem->total_cost);
+});

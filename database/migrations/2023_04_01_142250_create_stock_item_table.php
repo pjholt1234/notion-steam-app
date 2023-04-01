@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('steam_item_id')->unique()->references('id')->on('steam_items')->cascadeOnDelete();
             $table->integer('quantity')->default(0);
             $table->decimal('net_value')->nullable();
+            $table->decimal('total_cost')->nullable();
             $table->timestamps();
         });
     }
