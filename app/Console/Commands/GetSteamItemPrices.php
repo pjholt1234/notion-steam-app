@@ -41,7 +41,7 @@ class GetSteamItemPrices extends Command
             ->makeRequest('get');
 
         if(!is_float($usdToPounds)){
-            $usdToPounds = 0.785057;
+            $usdToPounds = config('app.default_conversion_rate');
         }
 
         foreach($items as $item){
