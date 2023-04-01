@@ -41,7 +41,7 @@ class GetSteamItemPrices extends Command
                 ->buildUrl($path)
                 ->makeRequest('get');
 
-            if(!isset($currentPrice)){
+            if(!is_float($currentPrice)){
                 continue;
             }
 
