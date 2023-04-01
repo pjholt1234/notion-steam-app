@@ -96,6 +96,6 @@ abstract class AbstractApiRepository
     protected function error($message): void
     {
         $class = get_class($this);
-        Log::error($class.' '.$message);
+        Log::error($class.' '.print_r($message,true));
     }
 }
