@@ -3,15 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\SteamItem;
+use App\Models\StockItem;
 use Illuminate\Http\Request;
 
 class SteamItemController extends Controller
 {
     public function index()
     {
-        $steamItems = SteamItem::select('name')->get();;
+        $items = StockItem::all()->map(function($item){
+            return [
+                'name' => $item->steamItem->name,
+                'quantity' => $item->quantity,
+                'total_cost' => $item->total_cost,
+                'net_value' => $item->net_value,
+            ];
+        });
         return view('steam-item.index', [
-            'steamItems' => $steamItems,
+            'items' => $items,
         ]);
     }
 
