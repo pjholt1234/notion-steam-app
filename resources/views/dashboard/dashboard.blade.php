@@ -22,14 +22,14 @@
                 </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                @foreach($items as $item)
-                    <tr>
-                        <x-td>{{$item['name']}}</x-td>
-                        <x-td>{{$item['quantity']}}</x-td>
-                        <x-td>£{{$item['total_cost']}}</x-td>
-                        <x-td>£{{$item['net_value']}}</x-td>
-                    </tr>
-                @endforeach
+                    @foreach($items as $item)
+                        <tr>
+                            <x-td>{{$item['name']}}</x-td>
+                            <x-td>{{$item['quantity']}}</x-td>
+                            <x-td>£{{$item['total_cost']}}</x-td>
+                            <x-td>£{{$item['net_value']}}</x-td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </x-card>

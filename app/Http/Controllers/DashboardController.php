@@ -6,9 +6,9 @@ use App\Models\SteamItem;
 use App\Models\StockItem;
 use Illuminate\Http\Request;
 
-class SteamItemController extends Controller
+class DashboardController extends Controller
 {
-    public function index()
+    public function dashboard()
     {
         $items = StockItem::all()->map(function($item){
             return [
@@ -18,7 +18,7 @@ class SteamItemController extends Controller
                 'net_value' => $item->net_value,
             ];
         });
-        return view('steam-item.index', [
+        return view('dashboard.dashboard', [
             'items' => $items,
         ]);
     }
