@@ -8,7 +8,7 @@
                     Inventory
                 </h5>
                 <div class="flex ml-auto">
-                    <x-button class="mx-2 border border-red-500 hover:bg-red-500">Add purchase</x-button>
+                    <x-button :href="route('purchases.create')" class="mx-2 border border-red-500 hover:bg-red-500">Add purchase</x-button>
                     <x-button class="mx-2 border border-green-500 hover:bg-green-500">Add sale</x-button>
                 </div>
             </div>
