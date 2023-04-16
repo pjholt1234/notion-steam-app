@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SteamItemController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,4 +20,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'dashboard']);
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+
+Route::prefix('/purchases')->controller(PurchaseController::class)->group(function () {
+    Route::get('/', 'create')->name('purchases.index');
+    Route::get('/create', 'create')->name('purchases.create');
+    Route::post('/store', 'store')->name('purchases.store');
+    Route::get('/edit/{steamPurchase}', 'edit')->name('purchases.edit');
+    Route::put('/update/{steamPurchase}', 'update')->name('purchases.update');
+});
