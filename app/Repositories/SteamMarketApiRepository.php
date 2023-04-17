@@ -10,7 +10,7 @@ class SteamMarketApiRepository extends AbstractApiRepository
     protected string $apiKey;
     protected bool $processData = true;
 
-    public function __construct(){
+    public function __construct(public bool $getImage = false){
         parent::__construct();
 
         $this->apiKey = config('app.steam_api_key');
@@ -24,8 +24,20 @@ class SteamMarketApiRepository extends AbstractApiRepository
         return $this;
     }
 
-    public function processData(array $response): ?float
+    public function processData(array $response)
     {
+
+        if($this->getImage){
+            if(array_key_exists('image', $response)){
+                return $response['image'];
+            }
+
+            $this->error('image key');
+
+            return null;
+        }
+
+
         if(array_key_exists('median_avg_prices_15days', $response)){
             return round($response['median_avg_prices_15days'][14][1],2);
         }

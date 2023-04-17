@@ -5,7 +5,7 @@
 ])
 
 @php
-    $defaultAttributes = [];
+    $defaultAttributes = ['rounded'];
 @endphp
 
 <x-field-wrapper

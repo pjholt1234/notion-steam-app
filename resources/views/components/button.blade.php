@@ -4,7 +4,7 @@
 
 @php
     $tag = $tag ?? ($href ? 'a' : 'button');
-    $defaultAttributes = ['class' => 'bg-transparent text-white font-semibold p-2 hover:border-transparent rounded'];
+    $defaultAttributes = ['class' => 'bg-transparent text-white font-semibold p-2 hover:border-transparent rounded justify-center items-center'];
 
     $href === null
     ? $defaultAttributes['type'] = 'button'
