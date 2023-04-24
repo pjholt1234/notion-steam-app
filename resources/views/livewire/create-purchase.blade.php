@@ -11,8 +11,8 @@
 
         <x-text-input
             wire:model="fields.quantity"
-            :error="$errors->has('quantity')"
-            :errorMsg="$errors->first('quantity')"
+            :error="$errors->has('fields.quantity')"
+            :errorMsg="$errors->first('fields.quantity')"
             name="quantity"
         >
             Quantity
@@ -20,16 +20,16 @@
 
         <x-text-input
             wire:model="fields.purchase_cost"
-            :error="$errors->has('purchase_cost')"
-            :errorMsg="$errors->first('purchase_cost')"
+            :error="$errors->has('fields.purchase_cost')"
+            :errorMsg="$errors->first('fields.purchase_cost')"
         >
             Cost
         </x-text-input>
 
         <x-date-input
             wire:model="fields.transaction_date"
-            :error="$errors->has('transaction_date')"
-            :errorMsg="$errors->first('transaction_date')"
+            :error="$errors->has('fields.transaction_date')"
+            :errorMsg="$errors->first('fields.transaction_date')"
         >
             Transaction date
         </x-date-input>
