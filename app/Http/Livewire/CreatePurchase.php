@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\SteamItem;
 use App\Models\SteamPurchase;
-use App\Repositories\SteamMarketApiRepository;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class CreatePurchase extends Component
@@ -19,7 +19,7 @@ class CreatePurchase extends Component
         'fields.steam_item_id' => 'required|exists:steam_items,id',
         'fields.quantity' => 'required|integer',
         'fields.purchase_cost' => 'required|decimal:0,2',
-        'fields.transaction_date' => 'nullable|before:now'
+        'fields.transaction_date' => 'nullable|before:tomorrow'
     ];
     public $fields = [
         'steam_item_id' => null,
@@ -32,7 +32,6 @@ class CreatePurchase extends Component
     {
         $this->steamItems = SteamItem::select('id', 'name')->get();
         $this->fields['steam_item_id'] = $this->steamItems->first()->id;
-
         $this->setImageUrl();
     }
 
@@ -44,7 +43,6 @@ class CreatePurchase extends Component
     public function setImageUrl()
     {
         $item = SteamItem::find($this->fields['steam_item_id']);
-
         $this->itemImageUrl = $item->getImageUrl();
     }
 
