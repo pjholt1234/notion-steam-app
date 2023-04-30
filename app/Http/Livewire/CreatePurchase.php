@@ -21,6 +21,7 @@ class CreatePurchase extends Component
         'fields.purchase_cost' => 'required|decimal:0,2',
         'fields.transaction_date' => 'nullable|before:tomorrow'
     ];
+    
     public $fields = [
         'steam_item_id' => null,
         'quantity' => null,
@@ -50,5 +51,10 @@ class CreatePurchase extends Component
     {
         $this->validate($this->rules);
         SteamPurchase::create($this->fields);
+
+        $this->dispatchBrowserEvent('alert', [
+            'success' => true,
+            'message' => 'Successfully created item purchase record'
+        ]);
     }
 }
