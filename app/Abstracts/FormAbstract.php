@@ -10,7 +10,7 @@ abstract class FormAbstract extends Component
     public array $rules;
     public string $view;
 
-    abstract function submit();
+    abstract public function submit();
 
     public function render()
     {
