@@ -10,7 +10,7 @@ use App\Traits\SteamItemFormTrait;
 class CreatePurchase extends FormAbstract
 {
     use SteamItemFormTrait;
-    
+
     public string $view = 'livewire.create-purchase';
 
     public array $rules = [
@@ -26,10 +26,6 @@ class CreatePurchase extends FormAbstract
         'purchase_cost' => null,
         'transaction_date' => null,
     ];
-
-    public function mount()
-    {
-    }
 
     public function submit()
     {
