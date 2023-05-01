@@ -5,8 +5,9 @@
     $defaultAttributes = ['class' => 'overflow-hidden'];
 @endphp
 <div
+    x-cloak
     {{$attributes->except('class')}}
-    x-data="{show: true}"
+    x-data="{show: false}"
     x-show="show"
     x-init="
       eventName = $el.id+'-toggle';
