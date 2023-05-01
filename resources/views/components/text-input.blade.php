@@ -7,6 +7,10 @@
 
 @php
     $defaultAttributes = ['class' => 'rounded'];
+
+    if($attributes->has('readonly')){
+        $defaultAttributes = ['class' => 'rounded bg-gray-300 text-gray-500'];
+    }
 @endphp
 
 <x-field-wrapper
