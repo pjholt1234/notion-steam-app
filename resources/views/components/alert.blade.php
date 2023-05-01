@@ -4,7 +4,7 @@
 ])
 
 @php
-    $defaultAttributes = ['class' => 'absolute h-[60px] inset-0 m-2 p-2 cursor-pointer rounded flex items-center text-white'];
+    $defaultAttributes = ['class' => 'z-50 fixed h-[60px] inset-0 m-2 p-2 cursor-pointer rounded flex items-center text-white'];
 @endphp
 <div {{$attributes->merge($defaultAttributes)}}
      x-data="{ show: false, onEvent: {{json_encode($onEvent)}}, message: '', success: true}"
@@ -16,7 +16,7 @@
             success = {{json_encode($success)}};
         }
      "
-     @alert.window ="
+     @alert.window="
         show = true
         setTimeout(() => show = false, 3000)
         message = $event.detail.message;
