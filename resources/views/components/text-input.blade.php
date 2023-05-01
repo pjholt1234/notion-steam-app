@@ -2,10 +2,11 @@
     'name' => null,
     'error' => false,
     'errorMsg' => null,
+    'placeholder' => null,
 ])
 
 @php
-    $defaultAttributes = ['rounded'];
+    $defaultAttributes = ['class' => 'rounded'];
 @endphp
 
 <x-field-wrapper
@@ -14,7 +15,7 @@
     :error="$error"
     :errorMsg="$errorMsg"
 >
-    <input name="{{$name}}" {{ $attributes->merge($defaultAttributes) }} />
+    <input name="{{$name}}" placeholder="{{$placeholder}}" {{ $attributes->merge($defaultAttributes) }} />
 </x-field-wrapper>
 
 

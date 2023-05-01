@@ -5,7 +5,7 @@
     'errorMsg' => '',
 ])
 
-<div class="flex flex-col">
+<div class="flex flex-col flex-grow">
     @if(isset($label))
         <label class="text-white" for="{{$name}}">{{$label}}</label>
     @endif
