@@ -3,7 +3,6 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SaleController;
-use App\Http\Controllers\SteamItemController;
 use Illuminate\Support\Facades\Route;
 
 /*
