@@ -10,7 +10,7 @@ trait SteamItemFormTrait
 
     public ?string $itemImageUrl = null;
 
-    public function booted()
+    public function initialise()
     {
         if(!array_key_exists('steam_item_id', $this->fields)){
             throw new \Error('Missing steam_item_id key');
