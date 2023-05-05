@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SteamItem;
 use App\Models\StockItem;
-use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
@@ -18,13 +16,9 @@ class DashboardController extends Controller
                 'net_value' => $item->net_value,
             ];
         });
+
         return view('dashboard.dashboard', [
             'items' => $items,
         ]);
-    }
-
-    public function create()
-    {
-
     }
 }
