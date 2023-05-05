@@ -27,6 +27,11 @@ class CreatePurchase extends FormAbstract
         'transaction_date' => null,
     ];
 
+    public function mount()
+    {
+        $this->initialise();
+    }
+
     public function openSearch()
     {
         $this->dispatchBrowserEvent('add-item-modal-toggle');
