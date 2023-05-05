@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SteamItemController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,9 +24,9 @@ Route::get('/', function () {
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
 Route::prefix('/purchases')->controller(PurchaseController::class)->group(function () {
-    Route::get('/', 'create')->name('purchases.index');
     Route::get('/create', 'create')->name('purchases.create');
-    Route::post('/store', 'store')->name('purchases.store');
-    Route::get('/edit/{steamPurchase}', 'edit')->name('purchases.edit');
-    Route::put('/update/{steamPurchase}', 'update')->name('purchases.update');
+});
+
+Route::prefix('/sales')->controller(SaleController::class)->group(function () {
+    Route::get('/create', 'create')->name('sales.create');
 });

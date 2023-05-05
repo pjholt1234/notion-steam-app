@@ -23,7 +23,7 @@ test('test automatic generation based on steam item', function () {
     $this->assertNotNull($steamItem->stockItem);
 });
 
-test('test sale relationship', function () {
+test('test sales relationship', function () {
     $steamItem = SteamItem::factory()->create([
         'market_hash_name' => $this->validMarketNames[0]
     ]);
