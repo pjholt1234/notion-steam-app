@@ -47,4 +47,14 @@ class CreateSale extends FormAbstract
             'message' => 'Successfully created item sale record'
         ]);
     }
+
+    public function updateSteamItem()
+    {
+        $this->setImageUrl();
+        $this->emitTo(
+            'sale-table',
+            'setItem',
+            $this->fields['steam_item_id']
+        );
+    }
 }
