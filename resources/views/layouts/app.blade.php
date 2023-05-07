@@ -8,6 +8,7 @@
     </style>
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
+    <script src="https://kit.fontawesome.com/8a130a8b91.js" crossorigin="anonymous"></script>
     <title>@yield('title')</title>
     @livewireStyles
 </head>
