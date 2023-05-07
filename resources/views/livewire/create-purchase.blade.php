@@ -2,7 +2,7 @@
     <div class="flex">
         <div>
             <div class="flex h-[30px]">
-                <select name="steam_item_id" wire:model="fields.steam_item_id" wire:change="setImageUrl" class="rounded">
+                <select name="steam_item_id" wire:model="fields.steam_item_id" wire:change="updateSteamItem" class="rounded">
                     @foreach($steamItems as $item)
                         <option value="{{$item->id}}">{{$item->name}}</option>
                     @endforeach

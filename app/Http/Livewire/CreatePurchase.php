@@ -47,4 +47,14 @@ class CreatePurchase extends FormAbstract
             'message' => 'Successfully created item purchase record'
         ]);
     }
+
+    public function updateSteamItem()
+    {
+        $this->setImageUrl();
+        $this->emitTo(
+            'purchase-table',
+            'setItem',
+            $this->fields['steam_item_id']
+        );
+    }
 }
