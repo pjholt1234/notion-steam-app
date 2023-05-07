@@ -23,10 +23,6 @@ abstract class TableAbstract extends Component
 
     public bool $enableSorting = true;
 
-    protected $listeners = [
-        'setSort' => 'setSort',
-    ];
-
     public function mount()
     {
         $this->itemsPerPage = $this->allowedItemsPerPage[0];
