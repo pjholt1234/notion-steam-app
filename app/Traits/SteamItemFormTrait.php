@@ -7,6 +7,7 @@ use App\Models\SteamItem;
 trait SteamItemFormTrait
 {
     public $steamItems;
+    public $setItem;
 
     public ?string $itemImageUrl = null;
 
@@ -24,7 +25,7 @@ trait SteamItemFormTrait
 
     public function setImageUrl(): void
     {
-        $item = SteamItem::find($this->fields['steam_item_id']);
-        $this->itemImageUrl = $item->getImageUrl();
+        $this->setItem = SteamItem::find($this->fields['steam_item_id']);
+        $this->itemImageUrl = $this->setItem->getImageUrl();
     }
 }
