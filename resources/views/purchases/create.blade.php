@@ -5,7 +5,7 @@
     <livewire:create-steam-item />
 </x-modal>
 
-<div class="grid grid-cols-2">
+<div class="grid grid-cols-3">
     <livewire:create-purchase />
 </div>
 
