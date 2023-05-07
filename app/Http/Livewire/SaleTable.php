@@ -65,8 +65,9 @@ class SaleTable extends TableAbstract
     public function copy($id)
     {
         $sale = SteamSale::find($id);
-        $sale->created_at = Carbon::now();
-        $sale->save();
+        $newSale = $sale->replicate();
+        $newSale->created_at = Carbon::now();
+        $newSale->save();
 
         $this->dispatchBrowserEvent('alert', [
             'success' => true,
