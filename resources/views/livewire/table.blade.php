@@ -1,4 +1,4 @@
-<div class="p-1">
+<div class="p-1 overflow-x-auto overflow-y-hidden">
     <table class="min-w-full divide-y divide-gray-200 rounded-lg">
         <thead class="bg-gray-50">
         <tr>

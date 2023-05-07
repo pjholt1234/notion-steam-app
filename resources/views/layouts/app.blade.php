@@ -11,7 +11,7 @@
     <title>@yield('title')</title>
     @livewireStyles
 </head>
-<body class="h-full w-full bg-primaryBackground">
+<body class="h-screen w-full bg-primaryBackground">
     @if(Session::has('alert'))
         <x-alert :success="Session::get('alert')['success']" :onEvent="false">
             {{ Session::get('alert')['message'] }}
