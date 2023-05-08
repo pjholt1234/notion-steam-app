@@ -31,7 +31,8 @@ class GetSteamItemPrices extends Command
      */
     public function handle(): int
     {
-       $itemPriceService = app(ItemPriceUpdateService::class);
+        $itemPriceService = app(ItemPriceUpdateService::class);
+        
         $options = $this->options();
         if (array_key_exists('itemId', $options) && isset($options['itemId'])) {
             $item = SteamItem::find($options['itemId']);
