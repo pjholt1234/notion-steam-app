@@ -46,6 +46,8 @@ class CreateSale extends FormAbstract
             'success' => true,
             'message' => 'Successfully created item sale record'
         ]);
+
+        $this->emit('refreshDatatable');
     }
 
     public function updateSteamItem()

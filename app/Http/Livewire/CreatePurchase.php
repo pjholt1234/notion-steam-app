@@ -46,6 +46,8 @@ class CreatePurchase extends FormAbstract
             'success' => true,
             'message' => 'Successfully created item purchase record'
         ]);
+
+        $this->emit('refreshDatatable');
     }
 
     public function updateSteamItem()

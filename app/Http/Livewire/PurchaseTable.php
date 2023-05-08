@@ -14,6 +14,7 @@ class PurchaseTable extends TableAbstract
 
     protected $listeners = [
         'setItem' => 'setItem',
+        'refreshDatatable' => '$refresh',
     ];
 
     public function builder(): Builder
