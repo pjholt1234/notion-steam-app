@@ -8,6 +8,7 @@ use App\Models\SteamSale;
 use App\Observers\SteamItemObserver;
 use App\Observers\SteamPurchaseObserver;
 use App\Observers\SteamSaleObserver;
+use App\Services\ItemPriceUpdateService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -17,7 +18,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind('App\Services\ItemPriceUpdateService', function ($app) {
+            return new ItemPriceUpdateService();
+        });
     }
 
     /**
