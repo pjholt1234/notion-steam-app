@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Abstracts\FormAbstract;
 use App\Models\SteamItem;
 use App\ApiRequests\SteamMarketApiRequest;
+use App\Services\UsdToGbpConversionService;
 
 class CreateSteamItem extends FormAbstract
 {
@@ -18,8 +19,17 @@ class CreateSteamItem extends FormAbstract
         'market_hash' => null,
     ];
 
+    protected UsdToGbpConversionService $conversionService;
+
     public bool $loading = false;
+
     public array $item = [];
+
+    public function booted()
+    {
+        $this->conversionService = app(UsdToGbpConversionService::class);
+    }
+
     public function search(){
         $this->validate($this->rules);
         $this->item = [];
@@ -68,7 +78,7 @@ class CreateSteamItem extends FormAbstract
 
             return;
         }
-
+        
         $usdToPounds = $this->conversionService->getConversionFactor();
 
         $this->item = [
@@ -103,6 +113,7 @@ class CreateSteamItem extends FormAbstract
             'name' => $this->item['name'],
             'market_hash_name' => $this->item['market_hash'],
             'image_url' => $this->item['image_url'],
+            'current_price_per_unit' => $this->item['current_price_per_unit']
         ]);
 
         $this->dispatchBrowserEvent('add-item-modal-toggle');
