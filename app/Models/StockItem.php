@@ -36,8 +36,8 @@ class StockItem extends Model
 
     public function calculateStock()
     {
-        $purchases = $this->steamPurchases->sum('quantity');
-        $sales = $this->steamSales->sum('quantity');
+        $purchases = $this->steamItem->steamPurchases->sum('quantity');
+        $sales = $this->steamItem->steamSales->sum('quantity');
 
         $quantity = $purchases - $sales;
 
@@ -51,7 +51,7 @@ class StockItem extends Model
 
     public function calculateCost()
     {
-        $this->total_cost = $this->steamPurchases->sum('purchase_cost');
+        $this->total_cost = $this->steamItem->steamPurchases->sum('purchase_cost');
         $this->save();
     }
 
@@ -59,5 +59,12 @@ class StockItem extends Model
     {
         $this->net_value = $this->quantity * $this->steamItem->current_price_per_unit;
         $this->save();
+    }
+
+    public function calculate()
+    {
+        $this->calculateStock();
+        $this->calculateCost();
+        $this->calculateNetValue();
     }
 }

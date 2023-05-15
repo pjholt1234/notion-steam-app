@@ -9,18 +9,11 @@ class SteamSaleObserver
 {
     public function saved(SteamSale $steamSale)
     {
-        if($steamSale->isDirty('quantity')){
-            $steamSale->steamItem->stockItem->calculateStock();
-        }
-
-        $steamSale->steamItem->stockItem->calculateNetValue();
+        $steamSale->steamItem->stockItem->calculate();
     }
 
     public function deleted(SteamSale $steamSale)
     {
-        $stockItem = $steamSale->steamItem->stockItem;
-        $stockItem->calculateStock();
-        $stockItem->calculateCost();
-        $stockItem->calculateNetValue();
+        $steamSale->steamItem->stockItem->calculate();
     }
 }
