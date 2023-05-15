@@ -3,16 +3,16 @@
 namespace App\Services;
 
 use App\Models\SteamItem;
-use App\Repositories\CurrencyConversionApiRepository;
-use App\Repositories\SteamMarketApiRepository;
+use App\ApiRequests\CurrencyConversionApiRequest;
+use App\ApiRequests\SteamMarketApiRequest;
 
 class ItemPriceUpdateService
 {
-    private readonly CurrencyConversionApiRepository $conversionApiRepository;
-    private readonly SteamMarketApiRepository $marketApiRepository;
+    private readonly CurrencyConversionApiRequest $conversionApiRepository;
+    private readonly SteamMarketApiRequest $marketApiRepository;
     public function __construct(){
-        $this->conversionApiRepository = new CurrencyConversionApiRepository();
-        $this->marketApiRepository = new SteamMarketApiRepository();
+        $this->conversionApiRepository = new CurrencyConversionApiRequest();
+        $this->marketApiRepository = new SteamMarketApiRequest();
     }
 
     public function updatePrice(SteamItem $item): void

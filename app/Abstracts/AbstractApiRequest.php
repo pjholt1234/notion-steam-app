@@ -11,7 +11,7 @@ use Symfony\Component\RateLimiter\LimiterInterface;
 use Symfony\Component\RateLimiter\RateLimiterFactory;
 use Symfony\Component\RateLimiter\Storage\InMemoryStorage;
 
-abstract class AbstractApiRepository
+abstract class AbstractApiRequest
 {
     protected string $baseUrl;
     protected string $url;

@@ -7,8 +7,8 @@ namespace App\Http\Livewire;
 use App\Helpers\SteamItemUpdater;
 use App\Interfaces\ProgressCallbackInterface;
 use App\Models\SteamItem;
-use App\Repositories\CurrencyConversionApiRepository;
-use App\Repositories\SteamMarketApiRepository;
+use App\ApiRequests\CurrencyConversionApiRequest;
+use App\ApiRequests\SteamMarketApiRequest;
 use App\Services\ItemPriceUpdateService;
 use Livewire\Component;
 

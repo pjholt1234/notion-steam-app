@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Repositories\SteamMarketApiRepository;
+use App\ApiRequests\SteamMarketApiRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -44,7 +44,7 @@ class SteamItem extends Model
 
         $url = '/market/item/730/'.$this->market_hash_name;
 
-        $marketApiRepository = new SteamMarketApiRepository(true);
+        $marketApiRepository = new SteamMarketApiRequest(true);
 
         $response = $marketApiRepository
             ->buildUrl($url)

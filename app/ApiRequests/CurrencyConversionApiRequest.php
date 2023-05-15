@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Repositories;
+namespace App\ApiRequests;
 
 
-use App\Abstracts\AbstractApiRepository;
+use App\Abstracts\AbstractApiRequest;
 
-class CurrencyConversionApiRepository extends AbstractApiRepository
+class CurrencyConversionApiRequest extends AbstractApiRequest
 {
     protected string $apiKey;
     protected bool $processData = true;

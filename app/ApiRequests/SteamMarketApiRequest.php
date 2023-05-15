@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Repositories;
+namespace App\ApiRequests;
 
 
-use App\Abstracts\AbstractApiRepository;
+use App\Abstracts\AbstractApiRequest;
 
-class SteamMarketApiRepository extends AbstractApiRepository
+class SteamMarketApiRequest extends AbstractApiRequest
 {
     protected string $apiKey;
     public function __construct(public bool $getImage = false, protected bool $processData = true){
@@ -29,18 +29,13 @@ class SteamMarketApiRepository extends AbstractApiRepository
             if(array_key_exists('image', $response)){
                 return $response['image'];
             }
-
-            $this->error('image key');
-
-            return null;
         }
-
 
         if(array_key_exists('median_avg_prices_15days', $response)){
-            return round($response['median_avg_prices_15days'][14][1],2);
+            return $response['median_avg_prices_15days'][14][1];
         }
 
-        $this->error('Missing median_avg_prices_15days key');
+        $this->error('Missing valid key');
 
         return null;
     }

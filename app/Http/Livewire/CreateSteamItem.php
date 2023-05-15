@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Abstracts\FormAbstract;
 use App\Models\SteamItem;
-use App\Repositories\SteamMarketApiRepository;
+use App\ApiRequests\SteamMarketApiRequest;
 
 class CreateSteamItem extends FormAbstract
 {
@@ -80,7 +80,7 @@ class CreateSteamItem extends FormAbstract
 
     public function fetchItem(string $marketHash): array
     {
-        $marketApiRepository = new SteamMarketApiRepository(processData: false);
+        $marketApiRepository = new SteamMarketApiRequest(processData: false);
         $url = '/market/item/730/'.$marketHash;
         return $marketApiRepository
             ->buildUrl($url)

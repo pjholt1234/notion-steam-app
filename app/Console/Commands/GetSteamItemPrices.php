@@ -4,8 +4,8 @@ namespace App\Console\Commands;
 
 use App\Helpers\SteamItemUpdater;
 use App\Models\SteamItem;
-use App\Repositories\CurrencyConversionApiRepository;
-use App\Repositories\SteamMarketApiRepository;
+use App\ApiRequests\CurrencyConversionApiRequest;
+use App\ApiRequests\SteamMarketApiRequest;
 use App\Services\ItemPriceUpdateService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
@@ -32,7 +32,7 @@ class GetSteamItemPrices extends Command
     public function handle(): int
     {
         $itemPriceService = app(ItemPriceUpdateService::class);
-        
+
         $options = $this->options();
         if (array_key_exists('itemId', $options) && isset($options['itemId'])) {
             $item = SteamItem::find($options['itemId']);
