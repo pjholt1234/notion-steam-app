@@ -8,22 +8,16 @@ use App\ApiRequests\SteamMarketApiRequest;
 
 class ItemPriceUpdateService
 {
-    private readonly CurrencyConversionApiRequest $conversionApiRepository;
+    private readonly UsdToGbpConversionService $conversionService;
     private readonly SteamMarketApiRequest $marketApiRepository;
     public function __construct(){
-        $this->conversionApiRepository = new CurrencyConversionApiRequest();
+        $this->conversionService = app(UsdToGbpConversionService::class);
         $this->marketApiRepository = new SteamMarketApiRequest();
     }
 
     public function updatePrice(SteamItem $item): void
     {
-        $usdToPounds = $this->conversionApiRepository
-            ->buildUrl('&currencies=GBP')
-            ->makeRequest('get');
-
-        if(!is_float($usdToPounds)){
-            $usdToPounds = config('app.default_conversion_rate');
-        }
+        $usdToPounds = $this->conversionService->getConversionFactor();
 
         $url = '/market/item/730/'.$item->market_hash_name;
         $currentPrice = $this->marketApiRepository

@@ -69,12 +69,15 @@ class CreateSteamItem extends FormAbstract
             return;
         }
 
+        $usdToPounds = $this->conversionService->getConversionFactor();
+
         $this->item = [
             'name' => $response['market_name'],
             'market_hash' => formatMarketHash($response['market_hash_name']),
             'url' => $response['url'],
             'image_url' => $response['image'],
             'stored' => false,
+            'current_price_per_unit' => round($response['median_avg_prices_15days'][14][1] * $usdToPounds,2),
         ];
     }
 
