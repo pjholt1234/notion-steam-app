@@ -54,4 +54,10 @@ class StockItem extends Model
         $this->total_cost = $this->steamPurchases->sum('purchase_cost');
         $this->save();
     }
+
+    public function calculateNetValue()
+    {
+        $this->net_value = $this->quantity * $this->steamItem->current_price_per_unit;
+        $this->save();
+    }
 }

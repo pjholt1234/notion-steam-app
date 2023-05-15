@@ -3,8 +3,6 @@
 namespace App\Observers;
 
 use App\Models\SteamPurchase;
-use App\Models\StockItem;
-use Illuminate\Database\Eloquent\Collection;
 
 class SteamPurchaseObserver
 {
@@ -17,5 +15,15 @@ class SteamPurchaseObserver
         if($steamPurchase->isDirty('purchase_cost')){
             $steamPurchase->steamItem->stockItem->calculateCost();
         }
+
+        $steamPurchase->steamItem->stockItem->calculateNetValue();
+    }
+
+    public function deleted(SteamPurchase $steamPurchase)
+    {
+        $stockItem = $steamPurchase->steamItem->stockItem;
+        $stockItem->calculateStock();
+        $stockItem->calculateCost();
+        $stockItem->calculateNetValue();
     }
 }
