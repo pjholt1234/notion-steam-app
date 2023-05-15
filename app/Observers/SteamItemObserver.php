@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\SteamItem;
+use App\Services\ItemPriceUpdateService;
 
 class SteamItemObserver
 {
@@ -20,5 +21,9 @@ class SteamItemObserver
     {
         //Create new stock item
         $steamItem->stockItem()->create();
+
+        //This should be done async
+        $priceUpdater = app(ItemPriceUpdateService::class);
+        $priceUpdater->updatePrice($steamItem);
     }
 }
