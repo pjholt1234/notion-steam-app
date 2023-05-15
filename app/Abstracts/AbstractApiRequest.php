@@ -20,7 +20,7 @@ abstract class AbstractApiRequest
     protected Carbon $start_time;
     protected int $rate_limit;
 
-    protected bool $processData = false;
+    protected bool $processData = true;
 
     abstract function buildUrl(string $url): self;
 
@@ -97,5 +97,11 @@ abstract class AbstractApiRequest
     {
         $class = get_class($this);
         Log::error($class.' '.print_r($message,true));
+    }
+
+    public function getRawOutput(): self
+    {
+        $this->processData = false;
+        return $this;
     }
 }

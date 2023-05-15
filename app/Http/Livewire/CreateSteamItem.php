@@ -80,10 +80,11 @@ class CreateSteamItem extends FormAbstract
 
     public function fetchItem(string $marketHash): array
     {
-        $marketApiRepository = new SteamMarketApiRequest(processData: false);
+        $marketApiRepository = new SteamMarketApiRequest();
         $url = '/market/item/730/'.$marketHash;
         return $marketApiRepository
             ->buildUrl($url)
+            ->getRawOutput()
             ->makeRequest('get');
     }
 

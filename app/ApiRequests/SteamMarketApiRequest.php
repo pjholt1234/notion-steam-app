@@ -8,7 +8,7 @@ use App\Abstracts\AbstractApiRequest;
 class SteamMarketApiRequest extends AbstractApiRequest
 {
     protected string $apiKey;
-    public function __construct(public bool $getImage = false, protected bool $processData = true){
+    public function __construct(public bool $getImage = false){
         parent::__construct();
 
         $this->apiKey = config('app.steam_api_key');
