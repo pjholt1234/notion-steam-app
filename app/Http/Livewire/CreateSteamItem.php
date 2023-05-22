@@ -78,7 +78,7 @@ class CreateSteamItem extends FormAbstract
 
             return;
         }
-        
+
         $usdToPounds = $this->conversionService->getConversionFactor();
 
         $this->item = [
@@ -115,6 +115,9 @@ class CreateSteamItem extends FormAbstract
             'image_url' => $this->item['image_url'],
             'current_price_per_unit' => $this->item['current_price_per_unit']
         ]);
+
+
+        $this->emit('steam-item-added');
 
         $this->dispatchBrowserEvent('add-item-modal-toggle');
 

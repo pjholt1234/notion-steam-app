@@ -27,8 +27,16 @@ class CreateSale extends FormAbstract
         'transaction_date' => null,
     ];
 
+    protected $listeners = [
+        'steam-item-added' => 'reInitialise'
+    ];
+
     public function mount()
     {
+        $this->initialise();
+    }
+
+    public function reInitialise(){
         $this->initialise();
     }
 
