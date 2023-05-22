@@ -11,7 +11,7 @@
             </div>
             <span class="ml-2 text-white">{{$message}}</span>
         @endif
-        <x-button class="ml-auto mr-0 border border-green-500 hover:bg-green-500" wire:click="request({{$currentIndex}})">
+        <x-button class="ml-auto mr-0 border border-blue-500 hover:bg-blue-500 w-[40px]" wire:click="request({{$currentIndex}})">
             <i class="fa-sharp fa-solid fa-download"></i>
         </x-button>
     </div>

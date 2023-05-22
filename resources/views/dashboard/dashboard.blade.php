@@ -9,7 +9,10 @@
                 </h5>
                 <livewire:request-data></livewire:request-data>
                 <div class="flex mr-0 ml-auto">
-                    <x-button :href="route('recalculate')" class="flex ml-2 border border-orange-500 hover:bg-orange-500">
+                    <x-button :href="route('dashboard.upload')" class="flex ml-2 border border-blue-500 hover:bg-blue-500 w-[40px]">
+                        <i class="fa-solid fa-upload"></i>
+                    </x-button>
+                    <x-button :href="route('dashboard.recalculate')" class="flex ml-2 border border-blue-500 hover:bg-blue-500 w-[40px]">
                         <i class="fa-solid fa-calculator"></i>
                     </x-button>
                     <x-button :href="route('purchases.create')" class="flex ml-2 border border-red-500 hover:bg-red-500">

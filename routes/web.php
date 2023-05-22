@@ -20,8 +20,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
-Route::get('/recalculate', [DashboardController::class, 'recalculate'])->name('recalculate');
+Route::controller(DashboardController::class)->group(function () {
+    Route::get('/dashboard', 'dashboard')->name('dashboard');
+    Route::get('/recalculate', 'recalculate')->name('dashboard.recalculate');
+    Route::get('/uploadToNotion', 'uploadToNotion')->name('dashboard.upload');
+});
+
 
 Route::prefix('/purchases')->controller(PurchaseController::class)->group(function () {
     Route::get('/create', 'create')->name('purchases.create');

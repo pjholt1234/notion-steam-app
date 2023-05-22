@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\StockItem;
+use Illuminate\Support\Facades\Artisan;
 
 class DashboardController extends Controller
 {
@@ -28,6 +29,18 @@ class DashboardController extends Controller
 
         session()->flash('alert', [
             'message' => 'Stock + profit successfully recalculated',
+            'success' => true,
+        ]);
+
+        return redirect()->route('dashboard');
+    }
+
+    public function uploadToNotion()
+    {
+        Artisan::call('notion:update');
+
+        session()->flash('alert', [
+            'message' => 'Notion board successfully updated',
             'success' => true,
         ]);
 
