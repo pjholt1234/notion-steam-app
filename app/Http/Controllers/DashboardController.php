@@ -21,4 +21,16 @@ class DashboardController extends Controller
             'items' => $items,
         ]);
     }
+
+    public function recalculate()
+    {
+        StockItem::all()->each(fn($stockItem) => $stockItem->calculate());
+
+        session()->flash('alert', [
+            'message' => 'Stock + profit successfully recalculated',
+            'success' => true,
+        ]);
+
+        return redirect()->route('dashboard');
+    }
 }

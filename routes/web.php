@@ -21,6 +21,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+Route::get('/recalculate', [DashboardController::class, 'recalculate'])->name('recalculate');
 
 Route::prefix('/purchases')->controller(PurchaseController::class)->group(function () {
     Route::get('/create', 'create')->name('purchases.create');
@@ -29,3 +30,4 @@ Route::prefix('/purchases')->controller(PurchaseController::class)->group(functi
 Route::prefix('/sales')->controller(SaleController::class)->group(function () {
     Route::get('/create', 'create')->name('sales.create');
 });
+
