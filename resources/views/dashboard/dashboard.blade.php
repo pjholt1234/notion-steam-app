@@ -8,15 +8,15 @@
                     Inventory
                 </h5>
                 <livewire:request-data></livewire:request-data>
-                <div class="flex">
-                    <x-button :href="route('recalculate')" class="ml-2 border border-orange-500 hover:bg-orange-500">
+                <div class="flex mr-0 ml-auto">
+                    <x-button :href="route('recalculate')" class="flex ml-2 border border-orange-500 hover:bg-orange-500">
                         <i class="fa-solid fa-calculator"></i>
                     </x-button>
-                    <x-button :href="route('purchases.create')" class="ml-2 border border-red-500 hover:bg-red-500">
-                        <i class="fa-solid fa-plus"></i> Purchase
+                    <x-button :href="route('purchases.create')" class="flex ml-2 border border-red-500 hover:bg-red-500">
+                        <i class="fa-solid fa-circle-plus"></i>&nbsp;Purchase
                     </x-button>
-                    <x-button :href="route('sales.create')" class="ml-2 border border-green-500 hover:bg-green-500">
-                        <i class="fa-solid fa-plus"></i> Sale
+                    <x-button :href="route('sales.create')" class="flex ml-2 border border-green-500 hover:bg-green-500">
+                        <i class="fa-solid fa-circle-plus"></i>&nbsp;Sale
                     </x-button>
                 </div>
             </div>
