@@ -13,7 +13,7 @@ abstract class TableAbstract extends Component
 
     public array $allowedItemsPerPage = [5, 10, 15];
 
-    public int $itemsPerPage;
+    public int $itemsPerPage = 5;
 
     public ?string $sortDirection = null;
 
@@ -22,6 +22,8 @@ abstract class TableAbstract extends Component
     public array $columns = [];
 
     public bool $enableSorting = true;
+
+    public bool $hasRefresh = false;
 
     public function mount()
     {
@@ -77,5 +79,9 @@ abstract class TableAbstract extends Component
             'desc' => '↓',
             default => '',
         };
+    }
+
+    public function remount(){
+        $this->reset();
     }
 }

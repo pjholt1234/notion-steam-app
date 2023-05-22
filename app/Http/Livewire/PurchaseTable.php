@@ -12,6 +12,8 @@ class PurchaseTable extends TableAbstract
 {
     public ?int $itemId = null;
 
+    public bool $hasRefresh = true;
+
     protected $listeners = [
         'setItem' => 'setItem',
         'refreshDatatable' => '$refresh',

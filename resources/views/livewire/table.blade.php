@@ -16,6 +16,13 @@
                     @endif
                 </x-td>
             @endforeach
+            @if($hasRefresh)
+                <x-td>
+                    <x-button wire:click="remount" class="text-gray-700 p-0">
+                        <i class="fa-solid fa-arrows-rotate"></i>
+                    </x-button>
+                </x-td>
+            @endif
         </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
@@ -24,6 +31,9 @@
                 @foreach($this->columns() as $column)
                     <x-td>{{$column->getContents($steamItem)}}</x-td>
                 @endforeach
+                @if($hasRefresh)
+                    <x-td></x-td>
+                @endif
             </tr>
         @endforeach
         </tbody>
