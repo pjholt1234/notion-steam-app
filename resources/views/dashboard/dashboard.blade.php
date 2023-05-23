@@ -9,10 +9,8 @@
                 </h5>
                 <livewire:progress-bar></livewire:progress-bar>
                 <div class="flex mr-0 ml-auto">
-                    <livewire:request-data></livewire:request-data>
-                    <x-button :href="route('dashboard.upload')" class="flex ml-2 border border-blue-500 hover:bg-blue-500 w-[40px]">
-                        <i class="fa-solid fa-upload"></i>
-                    </x-button>
+                    <livewire:request-steam-item-data-button></livewire:request-steam-item-data-button>
+                    <livewire:push-notion-data></livewire:push-notion-data>
                     <x-button :href="route('dashboard.recalculate')" class="flex ml-2 border border-blue-500 hover:bg-blue-500 w-[40px]">
                         <i class="fa-solid fa-calculator"></i>
                     </x-button>
