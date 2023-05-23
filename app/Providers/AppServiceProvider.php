@@ -9,6 +9,7 @@ use App\Observers\SteamItemObserver;
 use App\Observers\SteamPurchaseObserver;
 use App\Observers\SteamSaleObserver;
 use App\Services\ItemPriceUpdateService;
+use App\Services\UpdateNotionPageService;
 use App\Services\UsdToGbpConversionService;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,6 +26,10 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind('App\Services\UsdToGbpConversionService', function ($app) {
             return new UsdToGbpConversionService();
+        });
+
+        $this->app->bind('App\Services\UpdateNotionPageService', function ($app) {
+            return new UpdateNotionPageService();
         });
     }
 
