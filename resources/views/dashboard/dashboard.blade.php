@@ -7,8 +7,9 @@
                 <h5 class="text-xl font-medium text-white">
                     Inventory
                 </h5>
-                <livewire:request-data></livewire:request-data>
+                <livewire:progress-bar></livewire:progress-bar>
                 <div class="flex mr-0 ml-auto">
+                    <livewire:request-data></livewire:request-data>
                     <x-button :href="route('dashboard.upload')" class="flex ml-2 border border-blue-500 hover:bg-blue-500 w-[40px]">
                         <i class="fa-solid fa-upload"></i>
                     </x-button>
