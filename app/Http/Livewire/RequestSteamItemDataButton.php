@@ -3,29 +3,21 @@
 namespace App\Http\Livewire;
 
 // RequestData.php
-
-use App\Helpers\SteamItemUpdater;
-use App\Interfaces\ProgressCallbackInterface;
 use App\Models\SteamItem;
-use App\ApiRequests\CurrencyConversionApiRequest;
-use App\ApiRequests\SteamMarketApiRequest;
 use App\Services\ItemPriceUpdateService;
 use Livewire\Component;
 
-class RequestData extends Component
+class RequestSteamItemDataButton extends Component
 {
-    public string $message = '';
-
-    public $progress = 0;
-
     private $itemPriceService;
+
+    public int $progress = 0;
 
     public $currentIndex = 0;
 
     public array $items = [];
     public $increment;
 
-    public bool $active = false;
 
     protected $listeners = [
         'request' => 'request'
@@ -33,7 +25,7 @@ class RequestData extends Component
 
     public function render()
     {
-        return view('livewire.request-data');
+        return view('livewire.request-steam-item-data-button');
     }
 
 
@@ -52,14 +44,14 @@ class RequestData extends Component
 
     public function request($index)
     {
-        $this->active = true;
-        $this->message = 'Fetching data for item #'.$index+1;
-
         $item = SteamItem::find($this->items[$this->currentIndex]);
 
         $this->itemPriceService->updatePrice($item);
+        $this->progress = $this->increment + $this->progress;
 
-        $this->progress += $this->increment;
+        $message = 'Fetching data for item #'.$index+1;
+
+        $this->emit('updateProgress', $message, $this->progress);
 
         $this->currentIndex++;
 
@@ -69,11 +61,9 @@ class RequestData extends Component
                 'message' => 'Item price data fetching complete'
             ]);
 
+            $this->emit('setProgressBarState', false);
             $this->currentIndex = 0;
             $this->progress = 0;
-
-            $this->active = false;
-
             return;
         }
 
