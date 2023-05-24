@@ -42,7 +42,10 @@ class CreateSale extends FormAbstract
 
     public function openSearch()
     {
-        $this->dispatchBrowserEvent('add-item-modal-toggle');
+        $this->emit('updateModal', [
+            'content' => 'create-steam-item',
+            'title' => 'Create steam item',
+        ]);
     }
 
     public function submit()

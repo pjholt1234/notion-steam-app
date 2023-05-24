@@ -119,7 +119,7 @@ class CreateSteamItem extends FormAbstract
 
         $this->emit('steam-item-added');
 
-        $this->dispatchBrowserEvent('add-item-modal-toggle');
+        $this->dispatchBrowserEvent('modal-toggle');
 
         $this->dispatchBrowserEvent('alert', [
             'success' => true,
