@@ -13,6 +13,7 @@
     @livewireStyles
 </head>
 <body class="h-screen w-full bg-primaryBackground">
+    <livewire:modal></livewire:modal>
     @if(Session::has('alert'))
         <x-alert :success="Session::get('alert')['success']" :onEvent="false">
             {{ Session::get('alert')['message'] }}
