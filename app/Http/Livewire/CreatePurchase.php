@@ -83,6 +83,7 @@ class CreatePurchase extends FormAbstract
             $message = 'Successfully edited item purchase record';
         }
 
+        $this->exitEditMode();
 
         $this->dispatchBrowserEvent('alert', [
             'success' => true,
