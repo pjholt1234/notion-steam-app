@@ -67,15 +67,12 @@ class SaleTable extends TableAbstract
 
     public function copy($id)
     {
-        $sale = SteamSale::find($id);
-        $newSale = $sale->replicate();
-        $newSale->created_at = Carbon::now();
-        $newSale->save();
+        $this->emit('copySale', $id);
+    }
 
-        $this->dispatchBrowserEvent('alert', [
-            'success' => true,
-            'message' => 'Sale successfully duplicated'
-        ]);
+    public function edit($id)
+    {
+        $this->emit('setSale', $id);
     }
 
     public function createActionButtons($id): string
@@ -83,6 +80,9 @@ class SaleTable extends TableAbstract
         return '<div class="flex">
                     <x-button class="rounded p-1 text-sm border border-red-500 hover:bg-red-500 hover:text-white mr-1" wire:click="delete('.$id.')">
                         <i class="fa-solid fa-trash-can"></i>
+                    </x-button>
+                    <x-button class="rounded p-1 text-sm border border-orange-500 hover:bg-orange-500 hover:text-white mr-1" wire:click="edit('.$id.')">
+                        <i class="fa-solid fa-pen-to-square"></i>
                     </x-button>
                     <x-button class="rounded p-1 text-sm border border-green-500 hover:bg-green-500 hover:text-white" wire:click="copy('.$id.')">
                         <i class="fa-solid fa-copy"></i>

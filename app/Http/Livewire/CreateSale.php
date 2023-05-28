@@ -3,7 +3,6 @@
 namespace App\Http\Livewire;
 
 use App\Abstracts\FormAbstract;
-use App\Models\SteamPurchase;
 use App\Models\SteamSale;
 use App\Traits\SteamItemFormTrait;
 
@@ -12,6 +11,8 @@ class CreateSale extends FormAbstract
     use SteamItemFormTrait;
 
     public string $view = 'livewire.create-sale';
+
+    public $sale;
 
     public array $rules = [
         'fields.steam_item_id' => 'required|exists:steam_items,id',
@@ -23,20 +24,18 @@ class CreateSale extends FormAbstract
     public array $fields = [
         'steam_item_id' => null,
         'quantity' => null,
-        'purchase_cost' => null,
+        'sale_value' => null,
         'transaction_date' => null,
     ];
 
     protected $listeners = [
-        'steam-item-added' => 'reInitialise'
+        'steam-item-added' => 'initialise',
+        'copySale' => 'setSaleFields',
+        'setSale' => 'setSale',
     ];
 
     public function mount()
     {
-        $this->initialise();
-    }
-
-    public function reInitialise(){
         $this->initialise();
     }
 
@@ -48,14 +47,47 @@ class CreateSale extends FormAbstract
         ]);
     }
 
+    public function setSaleFields(?SteamSale $sale)
+    {
+        $this->fields = [
+            'steam_item_id' => $sale?->steam_item_id,
+            'quantity' => $sale?->quantity,
+            'sale_value' => $sale?->sale_value,
+            'transaction_date' => $sale?->transaction_date,
+        ];
+
+        if(isset($sale)){
+            $this->setImageUrl();
+            return;
+        }
+
+        $this->initialise();
+    }
+
+    public function setSale(?SteamSale $sale)
+    {
+        $this->sale = $sale;
+        $this->setSaleFields($sale);
+    }
+
     public function submit()
     {
         $this->validate($this->rules);
-        SteamSale::create($this->fields);
+        $message = 'Successfully created item sale record';
+
+        if(!isset($this->sale)){
+            SteamSale::create($this->fields);
+        } else {
+            $this->sale->update($this->fields);
+            $message = 'Successfully edited item sale record';
+        }
+
+        $this->exitEditMode();
+
 
         $this->dispatchBrowserEvent('alert', [
             'success' => true,
-            'message' => 'Successfully created item sale record'
+            'message' => $message
         ]);
 
         $this->emit('refreshDatatable');
@@ -69,5 +101,10 @@ class CreateSale extends FormAbstract
             'setItem',
             $this->fields['steam_item_id']
         );
+    }
+
+    public function exitEditMode()
+    {
+        $this->setSale(null);
     }
 }
