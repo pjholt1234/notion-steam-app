@@ -13,6 +13,7 @@ class CreatePurchase extends FormAbstract
 
     public string $view = 'livewire.create-purchase';
 
+    public $purchase;
     public array $rules = [
         'fields.steam_item_id' => 'required|exists:steam_items,id',
         'fields.quantity' => 'required|integer',
@@ -28,7 +29,9 @@ class CreatePurchase extends FormAbstract
     ];
 
     protected $listeners = [
-        'steam-item-added' => 'reInitialise'
+        'steam-item-added' => 'initialise',
+        'copyPurchase' => 'setPurchaseFields',
+        'setPurchase' => 'setPurchase',
     ];
 
     public function mount()
@@ -36,8 +39,27 @@ class CreatePurchase extends FormAbstract
         $this->initialise();
     }
 
-    public function reInitialise(){
+    public function setPurchaseFields(?SteamPurchase $purchase)
+    {
+        $this->fields = [
+            'steam_item_id' => $purchase?->steam_item_id,
+            'quantity' => $purchase?->quantity,
+            'purchase_cost' => $purchase?->purchase_cost,
+            'transaction_date' => $purchase?->transaction_date,
+        ];
+
+        if(isset($purchase)){
+            $this->setImageUrl();
+            return;
+        }
+
         $this->initialise();
+    }
+
+    public function setPurchase(?SteamPurchase $purchase)
+    {
+        $this->purchase = $purchase;
+        $this->setPurchaseFields($purchase);
     }
 
     public function openSearch()
@@ -51,11 +73,20 @@ class CreatePurchase extends FormAbstract
     public function submit()
     {
         $this->validate($this->rules);
-        SteamPurchase::create($this->fields);
+
+        $message = 'Successfully created item purchase record';
+
+        if(!isset($this->purchase)){
+            SteamPurchase::create($this->fields);
+        } else {
+            $this->purchase->update($this->fields);
+            $message = 'Successfully edited item purchase record';
+        }
+
 
         $this->dispatchBrowserEvent('alert', [
             'success' => true,
-            'message' => 'Successfully created item purchase record'
+            'message' => $message
         ]);
 
         $this->emit('refreshDatatable');
@@ -69,5 +100,10 @@ class CreatePurchase extends FormAbstract
             'setItem',
             $this->fields['steam_item_id']
         );
+    }
+
+    public function exitEditMode()
+    {
+        $this->setPurchase(null);
     }
 }

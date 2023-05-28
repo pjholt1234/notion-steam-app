@@ -43,13 +43,20 @@
                         <x-loading-icon></x-loading-icon>
                     @endif
                 </div>
-                <div class="my-auto ml-2 max-w-[200px]">
+                <div class="my-auto ml-2 max-w-[150px]">
                     @if(isset($setItem))
                         <span class="text-white">Name: {{$setItem->name}}</span><br>
                         <span class="text-white">Current price: {{$setItem->current_price_per_unit}}</span><br>
                     @endif
                 </div>
-                <x-button class="ml-auto mr-0 flex text-sm border border-green-500 hover:bg-green-500 mt-2 h-[40px]" wire:click="submit">Save Purchase</x-button>
+                <div class="flex ml-auto mr-0">
+                    @if(isset($purchase))
+                        <x-button class="mr-2 flex text-sm border border-red-500 hover:bg-red-500 mt-2 h-[40px] w-[40px]" wire:click="exitEditMode">X</x-button>
+                        <x-button class="flex text-sm border border-orange-500 hover:bg-orange-500 mt-2 h-[40px]" wire:click="submit">Edit Purchase</x-button>
+                    @else
+                        <x-button class="flex text-sm border border-green-500 hover:bg-green-500 mt-2 h-[40px]" wire:click="submit">Save Purchase</x-button>
+                    @endif
+                </div>
             </div>
         </div>
     </div>

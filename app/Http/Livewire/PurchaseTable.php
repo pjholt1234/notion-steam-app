@@ -50,6 +50,7 @@ class PurchaseTable extends TableAbstract
     public function setItem(int $itemId): void
     {
         $this->itemId = $itemId;
+        $this->resetPage();
     }
 
     public function delete($id)
@@ -65,15 +66,12 @@ class PurchaseTable extends TableAbstract
 
     public function copy($id)
     {
-        $sale = SteamPurchase::find($id);
-        $newSale = $sale->replicate();
-        $newSale->created_at = Carbon::now();
-        $newSale->save();
+        $this->emit('copyPurchase', $id);
+    }
 
-        $this->dispatchBrowserEvent('alert', [
-            'success' => true,
-            'message' => 'Purchase successfully duplicated'
-        ]);
+    public function edit($id)
+    {
+        $this->emit('setPurchase', $id);
     }
 
     public function createActionButtons($id): string
@@ -81,6 +79,9 @@ class PurchaseTable extends TableAbstract
         return '<div class="flex">
                     <x-button class="rounded p-1 text-sm border border-red-500 hover:bg-red-500 hover:text-white mr-1" wire:click="delete('.$id.')">
                         <i class="fa-solid fa-trash-can"></i>
+                    </x-button>
+                    <x-button class="rounded p-1 text-sm border border-orange-500 hover:bg-orange-500 hover:text-white mr-1" wire:click="edit('.$id.')">
+                        <i class="fa-solid fa-pen-to-square"></i>
                     </x-button>
                     <x-button class="rounded p-1 text-sm border border-green-500 hover:bg-green-500 hover:text-white" wire:click="copy('.$id.')">
                         <i class="fa-solid fa-copy"></i>
