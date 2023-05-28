@@ -72,9 +72,9 @@ class UpdateNotionPageService
     {
         $title      = Title::fromString($steamItem->name);
         $marketHash = RichTextProperty::fromString($steamItem->market_hash_name);
-        $quantity   = Number::create($steamItem->stockItem->quantity);
-        $netValue   = Number::create($steamItem->stockItem->net_value);
-        $totalCost  = Number::create($steamItem->stockItem->total_cost);
+        $quantity   = Number::create($steamItem->stockItem->quantity ?? 0);
+        $netValue   = Number::create($steamItem->stockItem->net_value ?? 0);
+        $totalCost  = Number::create($steamItem->stockItem->total_cost ?? 0);
 
         $page = Page::create($this->parent)
             ->addProperty("Item Name", $title)
@@ -97,12 +97,14 @@ class UpdateNotionPageService
             return;
         }
 
+        $profit = $steamItem->stockItem->net_value - $steamItem->stockItem->total_cost;
+
         $title      = Title::fromString($steamItem->name);
         $marketHash = RichTextProperty::fromString($steamItem->market_hash_name);
-        $quantity   = Number::create($steamItem->stockItem->quantity);
-        $netValue   = Number::create($steamItem->stockItem->net_value);
-        $totalCost  = Number::create($steamItem->stockItem->total_cost);
-        $profit     = Number::create($steamItem->stockItem->total_cost);
+        $quantity   = Number::create($steamItem->stockItem->quantity ?? 0);
+        $netValue   = Number::create($steamItem->stockItem->net_value ?? 0);
+        $totalCost  = Number::create($steamItem->stockItem->total_cost ?? 0);
+        $profit     = Number::create($profit ?? 0);
 
         $page = $result->pages[0]
             ->addProperty("Item Name", $title)
